@@ -1,0 +1,51 @@
+<div class="mb-4">
+  <%= link_to "Назад до кошика", cart_path,class:"btn btn-secondary" %>
+</div>
+<h1 class="text-center mb-4">Оформлення замовлення</h1>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <%= form_with model: @order, url: orders_path, local: true do |f| %>
+            <div class="mb-3">
+              <%= f.label :first_name, "Ім'я", class: "form-label fw-bold" %>
+              <%= f.text_field :first_name, required: true, class: "form-control", placeholder: "Введіть ваше ім'я" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :last_name, "Прізвище", class: "form-label fw-bold" %>
+              <%= f.text_field :last_name, required: true, class: "form-control", placeholder: "Введіть ваше прізвище" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :phone, "Телефон", class: "form-label fw-bold" %>
+              <%= f.telephone_field :phone, required: true, class: "form-control", placeholder: "+38 (XXX) XXX-XX-XX" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :city, "Місто", class: "form-label fw-bold" %>
+              <%= f.text_field :city, required: true, class: "form-control", placeholder: "Введіть ваше місто" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :street, "Вулиця", class: "form-label fw-bold" %>
+              <%= f.text_field :street, required: true, class: "form-control", placeholder: "Введіть вашу вулицю" %>
+            </div>
+
+            <div class="mb-3">
+              <%= f.label :delivery_service, "Виберіть поштовий сервіс", class: "form-label fw-bold" %>
+              <%= f.select :delivery_service, [["Нова пошта", "Нова пошта"], ["Meest", "Meest"], ["Укрпошта", "Укрпошта"]],
+                           prompt: "Оберіть поштовий сервіс", required: true, class: "form-select" %>
+            </div>
+
+            <div class="d-flex justify-content-center">
+              <%= f.submit "Оформити замовлення", class: "btn btn-success px-4" %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

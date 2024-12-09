@@ -1,0 +1,66 @@
+<h1 class="text-center my-4">Каталог товарів</h1>
+
+<!-- Фільтри -->
+<div class="mb-4">
+  <%= form_with url: products_path, method: :get, local: true, class: "row g-3" do |f| %>
+    <div class="col-md-3">
+      <label class="form-label">Категорія</label>
+      <%= f.select :category, Product.pluck(:category).uniq, { include_blank: true }, class: "form-select" %>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Ціна від</label>
+      <%= f.number_field :min_price, class: "form-control" %>
+    </div>
+    <div class="col-md-3">
+      <label class="form-label">Ціна до</label>
+      <%= f.number_field :max_price, class: "form-control" %>
+    </div>
+    <div class="col-md-3 d-flex align-items-end">
+      <div class="form-check">
+        <%= f.check_box :availability, { class: "form-check-input" }, 'in_stock', nil %>
+        <label class="form-check-label">Є на складі</label>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <%= f.submit 'Фільтрувати', class: "btn btn-primary w-100" %>
+    </div>
+  <% end %>
+</div>
+
+<!-- Список товарів -->
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <% @products.each do |product| %>
+    <div class="col">
+      <div class="card h-100">
+        <%= link_to product_path(product) do %>
+          <% if product.image.attached? %>
+            <%= image_tag product.image, class: "product-image" %>
+          <% else %>
+            <p>Зображення відсутнє</p>
+          <% end %>
+        <% end %>
+        <div class="card-body text-center">
+          <h5 class="card-title"><%= link_to product.name, product_path(product), class: "text-decoration-none" %></h5>
+          <p class="fw-bold text-danger">Ціна: <%= product.price %> грн</p>
+          <p><span class="badge <%= product.stock > 0 ? 'bg-success' : 'bg-danger' %>">
+            <%= product.stock > 0 ? 'Є на складі' : 'Немає в наявності' %>
+          </span></p>
+          <% if product.stock > 0 %>
+            <%= form_with url: cart_path, method: :put, local: true, class: "d-inline-block" do |f| %>
+              <%= f.hidden_field :product_id, value: product.id %>
+              <%= f.number_field :quantity, value: 1, min: 1, class: "form-control d-inline-block w-25 me-2" %>
+              <%= f.submit 'До кошика', class: 'btn btn-primary' %>
+            <% end %>
+          <% else %>
+            <p class="text-danger">Товар відсутній</p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="d-flex justify-content-center mt-4">
+  <%= paginate @products %>
+</div>
+

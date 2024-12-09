@@ -1,0 +1,76 @@
+
+<div class="mt-4">
+  <%= link_to "Назад до каталогу", products_path, class: "btn btn-secondary" %>
+</div>
+<div class="product-details container" xmlns="http://www.w3.org/1999/html">
+  <div class="row align-items-center">
+    <!-- Зображення товару -->
+    <div class="col-md-6">
+      <% if @product.image.attached? %>
+        <%= image_tag @product.image, class: "img-fluid" %>
+      <% else %>
+        <p>Зображення відсутнє</p>
+      <% end %>
+    </div>
+
+    <!-- Інформація про товар -->
+    <div class="col-md-6">
+      <h1 class="product-title"><%= @product.name %></h1>
+      <p class="product-code">Код: <%= @product.id %></p>
+      <p class="product-description"><%= @product.description %></p>
+      <p class="product-weight">Вага: <%= @product.weight || "Не вказано" %> кг</p>
+      <p class="product-price"><strong><%= number_to_currency(@product.price, unit: "грн", format: "%n %u") %> за шт</strong></p>
+
+      <!-- Кнопки для додавання до кошика -->
+      <div class="quantity-section">
+        <label for="quantity" class="form-label">Кількість:</label>
+        <%= form_with url: cart_path, method: :put, local: true do |f| %>
+          <%= f.hidden_field :product_id, value: @product.id %>
+          <%= f.number_field :quantity, value: 1, min: 1, class: "form-control", id: "quantity" %>
+          <%= f.submit 'До кошика', class: 'btn btn-warning mt-2' %>
+        <% end %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="reviews-section">
+  <h2 class="mb-4">Відгуки</h2>
+
+  <!-- Форма для додавання відгуків -->
+  <div class="leave-review mb-5">
+    <h3 class="mb-3">Залишити відгук</h3>
+    <%= form_with(model: [@product, @product.reviews.new], local: true) do |f| %>
+      <div class="mb-3">
+        <%= f.label :content, "Ваш відгук", class: "form-label" %>
+        <%= f.text_area :content, class: "form-control", rows: 3, placeholder: "Напишіть ваш відгук" %>
+      </div>
+      <div class="mb-3">
+        <%= f.label :reaction, "Ваша реакція", class: "form-label" %>
+        <%= f.select :reaction, [["Позитивна", "позитивна"], ["Нейтральна", "нейтральна"], ["Негативна", "негативна"]], {}, class: "form-select" %>
+      </div>
+      <%= f.submit "Додати відгук", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+  <!-- Існуючі відгуки -->
+  <div class="existing-reviews">
+    <h3 class="mb-3">Існуючі відгуки</h3>
+    <% @reviews.each do |review| %>
+      <div class="review-card mb-4 p-3 border rounded">
+        <p class="fw-bold mb-1"><%= review.user.email %>:</p>
+        <p class="mb-2"><%= review.content %></p>
+        <p class="text-muted">Реакція: <span class="fw-bold"><%= review.reaction %></span></p>
+        <% if current_user && (current_user == review.user || current_user.admin?) %>
+          <%= link_to "Видалити", product_review_path(@product, review), method: :delete, data: { confirm: "Ви впевнені?" }, class: "btn btn-danger btn-sm" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="text-center mt-4">
+  <%= link_to "Назад до каталогу", products_path, class: "btn btn-secondary" %>
+</div>
+

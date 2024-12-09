@@ -1,0 +1,28 @@
+<h1>Управління замовленнями</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>№ Замовлення</th>
+    <th>Користувач</th>
+    <th>Статус</th>
+    <th>Сума</th>
+    <th>Дата</th>
+    <th>Дії</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.user.email %></td>
+      <td><%= order.status %></td>
+      <td><%= order.total_price %> ₴</td>
+      <td><%= order.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+      <td>
+        <%= link_to 'Переглянути', admin_order_path(order), class: 'btn btn-primary' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

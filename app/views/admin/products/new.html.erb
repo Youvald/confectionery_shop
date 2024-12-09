@@ -1,0 +1,52 @@
+<div class="mt-3">
+  <%= link_to "Назад до каталогу", products_path, class: "btn btn-secondary" %>
+</div>
+<h1 class="mb-4 text-center">Додати новий товар</h1>
+
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h5 class="text-center mb-0">Форма додавання нового товару</h5>
+        </div>
+        <div class="card-body">
+          <%= form_with model: @product, url: admin_products_path, local: true, html: { class: 'needs-validation', novalidate: true } do |form| %>
+            <div class="mb-3">
+              <%= form.label :name, 'Назва товару', class: 'form-label fw-bold' %>
+              <%= form.text_field :name, class: 'form-control', placeholder: 'Введіть назву товару', required: true %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :description, 'Опис', class: 'form-label fw-bold' %>
+              <%= form.text_area :description, class: 'form-control', rows: 4, placeholder: 'Введіть опис товару', required: true %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :price, 'Ціна', class: 'form-label fw-bold' %>
+              <%= form.number_field :price, step: 0.01, class: 'form-control', placeholder: 'Введіть ціну товару', required: true %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :weight, 'Вага (в кг)', class: 'form-label fw-bold'%>
+              <%= form.number_field :weight, step: 0.01, class: "form-control",placeholder: 'Введіть вагу товару', required: true %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :stock, 'Кількість на складі', class: 'form-label fw-bold' %>
+              <%= form.number_field :stock, class: 'form-control', placeholder: 'Введіть кількість товару на складі', required: true %>
+            </div>
+            <div class="mb-3">
+              <%= form.label :category, 'Категорія', class: 'form-label fw-bold' %>
+              <%= form.text_field :category, class: 'form-control', placeholder: 'Введіть категорію товару', required: true %>
+            </div>
+            <div class="mb-4">
+              <%= form.label :image, 'Фотографія', class: 'form-label fw-bold' %>
+              <%= form.file_field :image, class: 'form-control' %>
+            </div>
+            <div class="d-flex justify-content-between">
+              <%= form.submit 'Додати товар', class: 'btn btn-success px-4' %>
+              <%= link_to 'Назад', admin_products_path, class: 'btn btn-secondary px-4' %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

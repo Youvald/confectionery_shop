@@ -1,0 +1,28 @@
+<h1>Управління відгуками</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>Користувач</th>
+    <th>Продукт</th>
+    <th>Реакція</th>
+    <th>Контент</th>
+    <th>Дата створення</th>
+    <th>Дії</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @reviews.each do |review| %>
+    <tr>
+      <td><%= review.user.email %></td>
+      <td><%= review.product.name %></td>
+      <td><%= review.reaction %></td>
+      <td><%= review.content %></td>
+      <td><%= review.created_at.strftime("%d.%m.%Y %H:%M") %></td>
+      <td>
+        <%= link_to 'Видалити', admin_review_path(review), method: :delete, data: { confirm: 'Ви впевнені, що хочете видалити цей відгук?' }, class: 'btn btn-danger' %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

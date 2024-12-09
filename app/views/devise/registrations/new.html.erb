@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <div class="card shadow-lg p-4" style="width: 400px;">
+    <h2 class="text-center mb-4">Реєстрація</h2>
+
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-group mb-3">
+        <%= f.label :email, "Електронна пошта", class: "form-label" %>
+        <%= f.email_field :email, required: true, autofocus: true, class: "form-control", placeholder: "Введіть вашу електронну пошту" %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label :password, "Пароль", class: "form-label" %>
+        <%= f.password_field :password,
+                             required: true,
+                             class: "form-control",
+                             placeholder: "Введіть пароль" %>
+        <% if @minimum_password_length %>
+          <small class="form-text text-muted">
+            Мінімум <%= @minimum_password_length %> символів
+          </small>
+        <% end %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label :password_confirmation, "Підтвердження пароля", class: "form-label" %>
+        <%= f.password_field :password_confirmation, required: true, class: "form-control", placeholder: "Повторіть пароль" %>
+      </div>
+
+      <div class="d-grid gap-2">
+        <%= f.button :submit, "Зареєструватися", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <hr class="my-4">
+    <div class="text-center">
+      <%= link_to "Увійти", new_user_session_path, class: "btn btn-link" %>
+      <%= link_to "Забули пароль?", new_user_password_path, class: "btn btn-link" %>
+    </div>
+  </div>
+</div>

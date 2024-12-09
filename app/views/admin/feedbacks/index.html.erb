@@ -1,0 +1,30 @@
+<h1>Повідомлення користувачів</h1>
+
+<% if @feedbacks.any? %>
+  <table class="table">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Повідомлення</th>
+      <th>Користувач</th>
+      <th>Дата створення</th>
+      <th>Дії</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @feedbacks.each_with_index do |feedback, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= feedback.content %></td>
+        <td><%= feedback.user.email %></td>
+        <td><%= feedback.created_at.strftime('%d.%m.%Y %H:%M') %></td>
+        <td>
+          <%= link_to 'Приховати', hide_admin_feedback_path(feedback), method: :patch, class: 'btn btn-warning', data: { confirm: 'Ви впевнені, що хочете приховати це повідомлення?' } %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>Немає доступних повідомлень.</p>
+<% end %>

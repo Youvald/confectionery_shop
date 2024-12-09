@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <div class="card shadow-lg p-4" style="width: 400px;">
+    <h2 class="text-center mb-4">Увійти</h2>
+
+    <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group mb-3">
+        <%= f.label :email, "Електронна пошта", class: "form-label" %>
+        <%= f.email_field :email, required: true, autofocus: true, class: "form-control", placeholder: "Введіть вашу електронну пошту" %>
+      </div>
+
+      <div class="form-group mb-3">
+        <%= f.label :password, "Пароль", class: "form-label" %>
+        <%= f.password_field :password, required: true, class: "form-control", placeholder: "Введіть ваш пароль" %>
+      </div>
+
+      <% if devise_mapping.rememberable? %>
+        <div class="form-check mb-3">
+          <%= f.check_box :remember_me, class: "form-check-input", id: "remember_me" %>
+          <%= f.label :remember_me, "Запам'ятати мене", class: "form-check-label" %>
+        </div>
+      <% end %>
+
+      <div class="d-grid gap-2">
+        <%= f.button :submit, "Увійти", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <hr class="my-4">
+    <div class="text-center">
+      <%= link_to "Зареєструватися", new_user_registration_path, class: "btn btn-link" %>
+      <%= link_to "Забули пароль?", new_user_password_path, class: "btn btn-link" %>
+    </div>
+  </div>
+</div>

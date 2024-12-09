@@ -1,0 +1,28 @@
+<div class="d-flex justify-content-center align-items-center mt-5">
+  <div class="card shadow-lg p-4" style="width: 400px;">
+    <h2 class="text-center mb-4">Відновлення пароля</h2>
+
+    <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
+      <%= f.error_notification %>
+
+      <div class="form-group mb-3">
+        <%= f.label :email, "Електронна пошта", class: "form-label" %>
+        <%= f.email_field :email,
+                          required: true,
+                          autofocus: true,
+                          class: "form-control",
+                          placeholder: "Введіть вашу електронну пошту" %>
+      </div>
+
+      <div class="d-grid gap-2">
+        <%= f.button :submit, "Надіслати інструкції для відновлення", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+
+    <hr class="my-4">
+    <div class="text-center">
+      <%= link_to "Увійти", new_user_session_path, class: "btn btn-link" %>
+      <%= link_to "Зареєструватися", new_user_registration_path, class: "btn btn-link" %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="mb-4">
+  <%= link_to "Назад до каталогу", products_path,class:"btn btn-secondary" %>
+</div>
+<h2 class="mb-4">Ваші замовлення</h2>
+<table class="table table-striped table-bordered">
+  <thead class="thead-dark">
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">Дата</th>
+    <th scope="col">Статус</th>
+    <th scope="col">Сума</th>
+    <th scope="col">Дії</th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+    <tr>
+      <td><%= order.id %></td>
+      <td><%= order.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+      <td><%= order.status %></td>
+      <td><%= number_to_currency(order.total_price, unit: "грн") %></td>
+      <td><%= link_to "Переглянути", order_path(order), class: "btn btn-primary btn-sm" %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

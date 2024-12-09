@@ -1,0 +1,18 @@
+current directory: /home/vboxuser/confectionery_shop/test/ruby/3.2.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+/usr/bin/ruby3.2 -I/usr/lib/ruby/vendor_ruby extconf.rb
+creating Makefile
+
+current directory: /home/vboxuser/confectionery_shop/test/ruby/3.2.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20241201-7455-zk78an sitelibdir\=./.gem.20241201-7455-zk78an clean
+
+current directory: /home/vboxuser/confectionery_shop/test/ruby/3.2.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20241201-7455-zk78an sitelibdir\=./.gem.20241201-7455-zk78an
+compiling websocket_mask.c
+linking shared-object websocket_mask.so
+
+current directory: /home/vboxuser/confectionery_shop/test/ruby/3.2.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20241201-7455-zk78an sitelibdir\=./.gem.20241201-7455-zk78an install
+/usr/bin/install -c -m 0755 websocket_mask.so ./.gem.20241201-7455-zk78an
+
+current directory: /home/vboxuser/confectionery_shop/test/ruby/3.2.0/gems/websocket-driver-0.7.6/ext/websocket-driver
+make DESTDIR\= sitearchdir\=./.gem.20241201-7455-zk78an sitelibdir\=./.gem.20241201-7455-zk78an clean
